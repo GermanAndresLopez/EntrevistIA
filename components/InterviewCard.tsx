@@ -1,7 +1,7 @@
 import "dayjs/locale/es";
 import dayjs from "dayjs";
 import Image from "next/image";
-import { getRandomInterviewCover } from "@/lib/utils";
+import { getRoleDisplay } from "@/lib/utils";
 import { Button } from "@/components/ui/button";
 import Link from "next/link";
 
@@ -30,6 +30,8 @@ const InterviewCard = async ({
     "D [de] MMMM, YYYY",
   );
 
+  const { emoji, gradient } = getRoleDisplay(role);
+
   return (
     <div className="card-border w-[360px] max-sm:w-full min-h-96">
       <div className="card-interview">
@@ -38,13 +40,10 @@ const InterviewCard = async ({
             <p className="badge-text">Conductual</p>
           </div>
 
-          <Image
-            src={getRandomInterviewCover()}
-            alt="cover image"
-            width={90}
-            height={90}
-            className="rounded-full object-fit size-[90px]"
-          />
+          {/* Role-based icon */}
+          <div className={`w-[90px] h-[90px] rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-4xl shadow-lg`}>
+            {emoji}
+          </div>
 
           <h3 className="mt-5 capitalize">{role}</h3>
 

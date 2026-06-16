@@ -10,6 +10,7 @@ interface Feedback {
   strengths: string[];
   areasForImprovement: string[];
   finalAssessment: string;
+  transcript?: Array<{ role: "user" | "assistant"; content: string }>;
   createdAt: string;
 }
 

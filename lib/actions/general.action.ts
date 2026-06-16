@@ -108,6 +108,7 @@ Todo en español. Sé objetivo y constructivo. Si las respuestas fueron cortas o
       strengths,
       areas_for_improvement: areasForImprovement,
       final_assessment: finalAssessment,
+      transcript,
       created_at: new Date().toISOString(),
     }).select("id").single();
 
@@ -143,6 +144,7 @@ export async function getFeedbackByInterviewId(params: GetFeedbackByInterviewIdP
     strengths: data.strengths,
     areasForImprovement: data.areas_for_improvement,
     finalAssessment: data.final_assessment,
+    transcript: data.transcript ?? [],
     createdAt: data.created_at,
   } as Feedback;
 }
