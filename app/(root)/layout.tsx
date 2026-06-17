@@ -12,10 +12,10 @@ const Layout = async ({ children }: { children: ReactNode }) => {
 
   return (
     <div className="root-layout">
-      <nav className="flex items-center justify-between">
+      <nav className="flex items-center justify-between pb-6 border-b border-light-800">
         <Link href="/dashboard" className="flex items-center gap-2.5">
           <Image src="/logo.svg" alt="Logo de EntrevistIA" width={38} height={38} />
-          <h2 className="text-primary-100 text-xl font-bold">EntrevistIA</h2>
+          <h2 className="text-primary-200 text-xl font-bold">EntrevistIA</h2>
         </Link>
         <UserMenu userName={user.name} userEmail={user.email} />
       </nav>

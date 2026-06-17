@@ -35,8 +35,8 @@ const UserMenu = ({ userName, userEmail }: { userName: string; userEmail: string
       </button>
 
       {open && (
-        <div className="absolute right-0 top-12 w-56 bg-dark-200 border border-dark-100/10 rounded-xl shadow-2xl z-50 overflow-hidden">
-          <div className="px-4 py-3 border-b border-dark-100/10">
+        <div className="absolute right-0 top-12 w-56 bg-white border border-light-800 rounded-xl shadow-lg z-50 overflow-hidden">
+          <div className="px-4 py-3 border-b border-light-800 bg-orange-50">
             <p className="text-sm font-semibold text-light-100 truncate">{userName}</p>
             <p className="text-xs text-light-400 truncate">{userEmail}</p>
           </div>
@@ -44,13 +44,13 @@ const UserMenu = ({ userName, userEmail }: { userName: string; userEmail: string
             <Link
               href="/perfil"
               onClick={() => setOpen(false)}
-              className="flex items-center gap-2 px-4 py-2.5 text-sm text-light-100 hover:bg-white/5 transition-colors"
+              className="flex items-center gap-2 px-4 py-2.5 text-sm text-light-100 hover:bg-orange-50 transition-colors"
             >
               Editar perfil
             </Link>
             <button
               onClick={handleSignOut}
-              className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-400 hover:bg-white/5 transition-colors cursor-pointer"
+              className="w-full flex items-center gap-2 px-4 py-2.5 text-sm text-red-500 hover:bg-red-50 transition-colors cursor-pointer"
             >
               Cerrar sesión
             </button>

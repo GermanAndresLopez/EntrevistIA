@@ -62,7 +62,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
           <div className="flex flex-col gap-2">
             <label className="text-sm text-light-100 font-medium">Cargo o rol</label>
             <input
-              className="bg-dark-200 rounded-full min-h-12 px-5 text-white placeholder:text-light-600 border border-input focus:outline-none focus:border-primary-200 transition-colors"
+              className="bg-white rounded-full min-h-12 px-5 text-light-100 placeholder:text-light-600 border border-light-800 focus:outline-none focus:border-primary-200 transition-colors"
               placeholder="Ej: Gerente de ventas, Coordinador de RRHH, Analista..."
               value={role}
               onChange={(e) => setRole(e.target.value)}
@@ -75,10 +75,10 @@ const InterviewForm = ({ userId }: { userId: string }) => {
             <select
               value={experience}
               onChange={(e) => setExperience(e.target.value)}
-              className="bg-dark-200 rounded-full min-h-12 px-5 text-white border border-input focus:outline-none focus:border-primary-200 transition-colors appearance-none cursor-pointer"
+              className="bg-white rounded-full min-h-12 px-5 text-light-100 border border-light-800 focus:outline-none focus:border-primary-200 transition-colors appearance-none cursor-pointer"
             >
               {EXPERIENCE_LEVELS.map(({ value, label }) => (
-                <option key={value} value={value} className="bg-dark-200">
+                <option key={value} value={value} className="bg-white">
                   {label}
                 </option>
               ))}
@@ -95,7 +95,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
                   className={`w-12 h-12 rounded-full text-sm font-bold border transition-all cursor-pointer ${
                     amount === n
                       ? "bg-primary-200 text-dark-100 border-primary-200"
-                      : "bg-dark-200 text-light-100 border-input hover:border-primary-200"
+                      : "bg-white text-light-400 border-light-800 hover:border-primary-200"
                   }`}
                 >
                   {n}
