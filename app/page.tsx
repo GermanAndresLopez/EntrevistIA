@@ -142,7 +142,7 @@ export default async function LandingPage() {
                 </div>
                 <div>
                   <h3 className="text-lg font-bold text-[#1c1917] mb-2">{f.title}</h3>
-                  <p className="text-[#57534e] text-sm leading-relaxed">{f.description}</p>
+                  <p className="text-[#44403c] text-[15px] font-medium leading-relaxed">{f.description}</p>
                 </div>
               </div>
             ))}
@@ -163,8 +163,8 @@ export default async function LandingPage() {
               </p>
               <ul className="flex flex-col gap-3">
                 {benefits.map((b) => (
-                  <li key={b} className="flex items-center gap-3 text-[#292524]">
-                    <CheckCircle className="h-5 w-5 text-orange-500 shrink-0" />
+                  <li key={b} className="flex items-center gap-3 text-[#1c1917] font-medium">
+                    <CheckCircle className="h-5 w-5 text-orange-600 shrink-0" />
                     {b}
                   </li>
                 ))}
@@ -215,7 +215,7 @@ export default async function LandingPage() {
                   {s.step}
                 </div>
                 <h3 className="text-xl font-bold text-[#1c1917]">{s.title}</h3>
-                <p className="text-[#57534e] text-sm max-w-xs">{s.description}</p>
+                <p className="text-[#44403c] text-[15px] font-medium max-w-xs">{s.description}</p>
               </div>
             ))}
           </div>

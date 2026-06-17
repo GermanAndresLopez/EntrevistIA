@@ -36,7 +36,7 @@ const Page = async () => {
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
-        <h2>Tus entrevistas</h2>
+        <h2 className="text-xl md:text-2xl">Tus entrevistas</h2>
         <div className="interviews-section">
           {hasPastInterviews ? (
             userInterviews?.map((interview) => (
@@ -49,7 +49,7 @@ const Page = async () => {
       </section>
 
       <section className="flex flex-col gap-6 mt-8">
-        <h2>Plantillas de entrevistas</h2>
+        <h2 className="text-xl md:text-2xl">Plantillas de entrevistas</h2>
         <div className="interviews-section">
           {interviewTemplates.map((template) => (
             <InterviewCard

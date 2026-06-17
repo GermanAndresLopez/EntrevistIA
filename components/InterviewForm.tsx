@@ -53,7 +53,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
       <div className="card-border w-full">
         <div className="card p-8 flex flex-col gap-6">
           <div className="flex flex-col gap-1">
-            <h3 className="text-primary-100">Nueva entrevista</h3>
+            <h3>Nueva entrevista</h3>
             <p className="text-sm text-light-400">
               Indicá el cargo y te generamos preguntas conductuales personalizadas
             </p>

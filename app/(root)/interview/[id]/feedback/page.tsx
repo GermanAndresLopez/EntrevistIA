@@ -32,7 +32,7 @@ const Page = async ({ params }: RouteParams) => {
         <div className={`w-14 h-14 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-2xl shadow-lg`}>
           {emoji}
         </div>
-        <h1 className="text-3xl font-semibold capitalize">
+        <h1 className="text-3xl font-bold capitalize">
           Retroalimentación — {interview.role}
         </h1>
       </div>
@@ -67,14 +67,14 @@ const Page = async ({ params }: RouteParams) => {
       <div className="flex flex-col gap-4">
         <h2>Desglose por competencia</h2>
         {feedback?.categoryScores?.map((category, index) => (
-          <div key={index} className="flex flex-col gap-1 p-4 bg-dark-200 rounded-xl">
+          <div key={index} className="flex flex-col gap-1 p-5 bg-orange-50 rounded-xl border border-orange-100">
             <div className="flex items-center justify-between">
-              <p className="font-bold text-light-100">
+              <p className="font-bold text-light-100 text-base">
                 {index + 1}. {category.name}
               </p>
-              <span className="text-primary-200 font-bold text-sm">{category.score}/100</span>
+              <span className="text-orange-600 font-extrabold text-base bg-orange-100 px-3 py-0.5 rounded-full">{category.score}/100</span>
             </div>
-            <p className="text-light-400 text-sm">{category.comment}</p>
+            <p className="text-light-400 text-sm font-medium mt-1">{category.comment}</p>
           </div>
         ))}
       </div>
@@ -85,7 +85,7 @@ const Page = async ({ params }: RouteParams) => {
         <ul className="flex flex-col gap-2">
           {feedback?.strengths?.map((strength, index) => (
             <li key={index} className="flex items-start gap-2 text-light-100">
-              <span className="text-green-400 mt-0.5">✓</span>
+              <span className="text-green-600 mt-0.5 font-bold">✓</span>
               {strength}
             </li>
           ))}
@@ -98,7 +98,7 @@ const Page = async ({ params }: RouteParams) => {
         <ul className="flex flex-col gap-2">
           {feedback?.areasForImprovement?.map((area, index) => (
             <li key={index} className="flex items-start gap-2 text-light-100">
-              <span className="text-amber-400 mt-0.5">→</span>
+              <span className="text-amber-600 mt-0.5 font-bold">→</span>
               {area}
             </li>
           ))}

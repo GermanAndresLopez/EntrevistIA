@@ -83,17 +83,26 @@
     background-color: #fffbf5;
     color: #1c1917;
   }
-  p {
-    @apply text-light-400;
+  h1 {
+    @apply text-light-100 font-bold;
   }
-  h1, h2, h3, h4 {
-    @apply text-light-100;
+  h2 {
+    @apply text-light-100 font-bold text-2xl;
+  }
+  h3 {
+    @apply text-light-100 font-semibold text-lg;
+  }
+  h4 {
+    @apply text-light-100 font-semibold;
+  }
+  p {
+    @apply text-light-400 font-medium;
   }
   ul {
     @apply list-disc list-inside;
   }
   li {
-    @apply text-light-400;
+    @apply text-light-100 font-medium;
   }
 }
 
@@ -187,8 +196,11 @@
   .section-feedback {
     @apply flex flex-col gap-8 max-w-5xl mx-auto max-sm:px-4 text-lg leading-7;
 
-    h2, h3 {
-      @apply text-light-100;
+    h2 {
+      @apply text-light-100 font-bold text-2xl;
+    }
+    h3 {
+      @apply text-light-100 font-semibold text-xl;
     }
 
     hr {
@@ -212,10 +224,10 @@
     @apply flex flex-row warm-hero rounded-3xl px-16 py-6 items-center justify-between max-sm:px-4 border border-orange-100 shadow-sm;
 
     h2 {
-      @apply text-light-100;
+      @apply text-light-100 font-bold text-2xl md:text-3xl;
     }
     p {
-      @apply text-light-400;
+      @apply text-light-400 font-medium text-base;
     }
   }
 
@@ -227,15 +239,15 @@
     @apply warm-surface rounded-2xl min-h-full flex flex-col p-6 relative overflow-hidden gap-10 justify-between border border-light-800 shadow-sm;
 
     h3 {
-      @apply text-light-100 text-xl font-semibold;
+      @apply text-light-100 text-xl font-bold;
     }
 
     p {
-      @apply text-light-400;
+      @apply text-light-400 font-medium;
     }
 
     .badge-text {
-      @apply text-sm font-semibold capitalize text-primary-200;
+      @apply text-xs font-bold capitalize text-orange-700 tracking-wide;
     }
   }
 }
