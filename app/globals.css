@@ -16,8 +16,8 @@
 
   /* Texto sobre fondos claros */
   --color-light-100: #292524;     /* stone-800 — texto principal */
-  --color-light-400: #78716c;     /* stone-500 — texto secundario */
-  --color-light-600: #a8a29e;     /* stone-400 — placeholder / muted */
+  --color-light-400: #57534e;     /* stone-600 — texto secundario (ratio 6.3:1) */
+  --color-light-600: #78716c;     /* stone-500 — placeholder / muted */
   --color-light-800: #e7e5e4;     /* stone-200 — bordes suaves */
 
   /* Superficies */
@@ -202,7 +202,6 @@
 
   .auth-layout {
     @apply flex items-center justify-center mx-auto max-w-7xl min-h-screen max-sm:px-4 max-sm:py-8;
-    background-color: #fffbf5;
   }
 
   .root-layout {
@@ -291,5 +290,86 @@
   to {
     opacity: 1;
     transform: translateY(0);
+  }
+}
+
+/* ─── Animated background orbs ─── */
+
+.warm-orb {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(72px);
+  animation: warmFloat linear infinite;
+}
+
+.warm-orb-1 {
+  width: 680px;
+  height: 680px;
+  background: radial-gradient(circle at 35% 40%, #fdba74 0%, rgba(251, 146, 60, 0.35) 50%, transparent 80%);
+  top: -200px;
+  right: -140px;
+  animation-duration: 22s;
+  opacity: 0.6;
+}
+
+.warm-orb-2 {
+  width: 580px;
+  height: 580px;
+  background: radial-gradient(circle, rgba(252, 211, 77, 0.55), rgba(245, 158, 11, 0.22), transparent);
+  bottom: -140px;
+  left: -130px;
+  animation-duration: 28s;
+  animation-delay: -10s;
+  opacity: 0.5;
+}
+
+.warm-orb-3 {
+  width: 400px;
+  height: 400px;
+  background: radial-gradient(circle, rgba(253, 164, 175, 0.48), rgba(251, 113, 133, 0.2), transparent);
+  top: 32%;
+  left: 14%;
+  animation-duration: 19s;
+  animation-delay: -14s;
+  opacity: 0.42;
+}
+
+.warm-orb-4 {
+  width: 320px;
+  height: 320px;
+  background: radial-gradient(circle, rgba(253, 186, 116, 0.55), rgba(234, 88, 12, 0.15), transparent);
+  top: 58%;
+  right: 6%;
+  animation-duration: 24s;
+  animation-delay: -6s;
+  opacity: 0.5;
+}
+
+.warm-orb-5 {
+  width: 260px;
+  height: 260px;
+  background: radial-gradient(circle, rgba(254, 215, 170, 0.6), transparent);
+  top: 8%;
+  left: 38%;
+  animation-duration: 16s;
+  animation-delay: -4s;
+  opacity: 0.45;
+}
+
+@keyframes warmFloat {
+  0%, 100% {
+    transform: translate(0, 0) scale(1);
+  }
+  18% {
+    transform: translate(38px, -58px) scale(1.07);
+  }
+  40% {
+    transform: translate(-32px, 42px) scale(0.93);
+  }
+  62% {
+    transform: translate(48px, 28px) scale(1.05);
+  }
+  82% {
+    transform: translate(-18px, -38px) scale(0.97);
   }
 }
