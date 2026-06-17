@@ -23,16 +23,21 @@ export async function POST(request: Request) {
           {
             role: "system",
             content: `Eres un experto en selección de personal y entrevistas conductuales.
-Tu tarea es generar preguntas de entrevista enfocadas en evaluar competencias blandas, profesionalismo, comunicación, liderazgo, manejo de conflictos, trabajo en equipo y toma de decisiones.
-Las preguntas deben seguir el método STAR (Situación, Tarea, Acción, Resultado) e invitar al candidato a contar experiencias concretas.
-NO hagas preguntas técnicas ni sobre herramientas específicas.
+Tu tarea es generar preguntas ÚNICAS y VARIADAS para evaluar competencias blandas: comunicación, liderazgo, manejo de conflictos, trabajo en equipo, toma de decisiones y profesionalismo.
+REGLAS IMPORTANTES:
+- VARÍA los formatos: algunas deben ser sobre experiencias pasadas ("Contame sobre una vez que..."), otras situacionales ("¿Qué harías si...?"), otras de valores ("¿Cómo definís el éxito?"), otras de autoevaluación ("¿Cuál es tu mayor debilidad profesional?").
+- NUNCA uses el mismo comienzo para dos preguntas.
+- NO hagas preguntas técnicas ni sobre herramientas.
+- Las preguntas deben poder ser respondidas verbalmente en 1-3 minutos.
+- Usá un tono conversacional y natural, como un entrevistador humano.
+- Incluí variedad temática: no todas sobre conflictos, no todas sobre liderazgo.
 Responde SOLO con un array JSON de strings, sin texto adicional ni markdown.`,
           },
           {
             role: "user",
-            content: `Genera ${amount} preguntas conductuales para entrevistar a un candidato al cargo de "${role}" con nivel de experiencia "${experience}".
-Ajustá la profundidad y complejidad de las preguntas según el nivel: si es "sin-experiencia" o "novato", preguntá por situaciones académicas, voluntariados o hipotéticas; si es "intermedio" o "avanzado", preguntá por experiencias laborales reales y de mayor responsabilidad.
-Las preguntas deben evaluar: comunicación, manejo de situaciones reales, actitud ante los retos, liderazgo, trabajo en equipo y profesionalismo.
+            content: `Genera ${amount} preguntas conductuales distintas entre sí para el cargo de "${role}" con experiencia nivel "${experience}".
+Seed de variación: ${Date.now()}.
+Nivel de complejidad: ${experience === "sin-experiencia" || experience === "novato" ? "Orientá las preguntas a situaciones académicas, de voluntariado, trabajo en equipo escolar o hipotéticas. Evitá pedir experiencia laboral formal." : "Las preguntas deben requerir ejemplos de experiencia laboral real, con responsabilidades concretas y situaciones de presión."}
 Formatea así: ["Pregunta 1", "Pregunta 2", ...]`,
           },
         ],

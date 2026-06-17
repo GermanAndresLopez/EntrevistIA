@@ -27,6 +27,14 @@ declare global {
   }
 }
 
+// Muestra sólo las últimas oraciones que quepan en maxChars
+const tailText = (text: string, maxChars = 200): string => {
+  if (text.length <= maxChars) return text;
+  const chunk = text.slice(-maxChars);
+  const firstSpace = chunk.indexOf(" ");
+  return firstSpace > 0 ? chunk.slice(firstSpace + 1) : chunk;
+};
+
 const Bubble = ({ text, side }: { text: string; side: "left" | "right" }) => (
   <div
     key={text}
@@ -37,7 +45,7 @@ const Bubble = ({ text, side }: { text: string; side: "left" | "right" }) => (
         : "bg-primary-200 text-dark-100 rounded-tr-none self-end",
     )}
   >
-    {text}
+    {tailText(text)}
   </div>
 );
 
@@ -305,7 +313,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
             <>
               {isListening && (
                 <div className="max-w-[260px] px-4 py-3 rounded-2xl rounded-tr-none bg-primary-200/40 text-light-100 text-sm leading-relaxed italic self-end animate-pulse">
-                  {liveText || "Escuchando..."}
+                  {liveText ? tailText(liveText) : "Escuchando..."}
                 </div>
               )}
               {!isListening && userBubble && (
