@@ -38,7 +38,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
 
     try {
       const res = await fetch(
-        `${process.env.NEXT_PUBLIC_BASE_URL}api/vapi/generate`,
+        `/api/vapi/generate`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
