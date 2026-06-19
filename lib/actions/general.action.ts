@@ -68,9 +68,9 @@ export async function createFeedback(params: CreateFeedbackParams) {
         messages: [
           {
             role: "system",
-            content: `Eres un evaluador experto en entrevistas conductuales. Analizás la transcripción textual de una entrevista y evaluás al candidato con criterios muy específicos. Sé estricto y realista — si las respuestas fueron cortas, vagas o con muletillas, el puntaje debe ser bajo.
+            content: `Eres un evaluador experto en entrevistas conductuales. Analizas la transcripción textual de una entrevista y evalúas al candidato con criterios muy específicos. Sé estricto y realista — si las respuestas fueron cortas, vagas o con muletillas, el puntaje debe ser bajo.
 
-RÚBRICA DE PUNTUACIÓN (aplicala estrictamente):
+RÚBRICA DE PUNTUACIÓN (aplícala estrictamente):
 
 1. Comunicación y Claridad (0-100):
    - 85-100: Respuestas estructuradas, vocabulario rico, sin muletillas, ideas bien conectadas
@@ -109,7 +109,7 @@ RÚBRICA DE PUNTUACIÓN (aplicala estrictamente):
 
 El totalScore es el promedio ponderado de las 5 categorías.
 
-Para las áreas de mejora, sé MUY ESPECÍFICO sobre hábitos del habla: mencioná si usó muletillas, si sus respuestas fueron demasiado cortas, si le faltaron ejemplos concretos, si se notó inseguridad, si usó lenguaje informal, etc.
+Para las áreas de mejora, sé MUY ESPECÍFICO sobre hábitos del habla: menciona si usó muletillas, si sus respuestas fueron demasiado cortas, si le faltaron ejemplos concretos, si se notó inseguridad, si usó lenguaje informal, etc.
 
 Devuelve SOLO un JSON válido:
 {

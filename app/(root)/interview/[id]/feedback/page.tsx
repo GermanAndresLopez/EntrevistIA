@@ -126,7 +126,7 @@ const Page = async ({ params }: RouteParams) => {
                   }`}
                 >
                   <p className="text-xs font-semibold mb-1 opacity-60">
-                    {msg.role === "user" ? "Vos" : "Entrevistador"}
+                    {msg.role === "user" ? "Tú" : "Entrevistador"}
                   </p>
                   {msg.content}
                 </div>

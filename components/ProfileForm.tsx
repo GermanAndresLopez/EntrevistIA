@@ -33,8 +33,8 @@ const ProfileForm = ({ user }: { user: User }) => {
     <div className="card-border w-full max-w-xl mx-auto">
       <div className="card p-8 flex flex-col gap-6">
         <div className="flex flex-col gap-1">
-          <h3 className="text-primary-200 text-xl font-semibold">Información personal</h3>
-          <p className="text-sm text-light-400">Actualizá tus datos de perfil</p>
+          <h3 className="text-xl font-bold">Información personal</h3>
+          <p className="text-sm text-light-400">Actualiza tus datos de perfil</p>
         </div>
 
         <div className="flex flex-col gap-2">
@@ -49,8 +49,8 @@ const ProfileForm = ({ user }: { user: User }) => {
 
         <div className="border-t border-light-800 pt-4 flex flex-col gap-4">
           <div className="flex flex-col gap-1">
-            <h4 className="text-primary-200 font-semibold">Cambiar contraseña</h4>
-            <p className="text-sm text-light-400">Dejá en blanco si no querés cambiarla</p>
+            <h4 className="font-bold">Cambiar contraseña</h4>
+            <p className="text-sm text-light-400">Deja en blanco si no quieres cambiarla</p>
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-sm text-light-100 font-medium">Nueva contraseña</label>
@@ -58,7 +58,7 @@ const ProfileForm = ({ user }: { user: User }) => {
           </div>
           <div className="flex flex-col gap-2">
             <label className="text-sm text-light-100 font-medium">Confirmar contraseña</label>
-            <input type="password" className={inputClass} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Repetí la contraseña" />
+            <input type="password" className={inputClass} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Repite la contraseña" />
           </div>
         </div>
 

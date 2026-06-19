@@ -62,7 +62,7 @@ Responde SOLO con un array JSON de strings, sin texto adicional ni markdown.`,
               role: "user",
               content: `Genera ${amount} preguntas conductuales específicas para el cargo de "${role}" con nivel de experiencia "${experience}".
 Seed: ${Date.now()}.
-${experience === "sin-experiencia" || experience === "novato" ? "Orientá las preguntas a situaciones académicas, prácticas, voluntariado o hipotéticas relacionadas con el cargo. No asumas experiencia laboral formal." : "Las preguntas deben requerir ejemplos de experiencia laboral real en funciones similares al cargo."}
+${experience === "sin-experiencia" || experience === "novato" ? "Orienta las preguntas a situaciones académicas, prácticas, voluntariado o hipotéticas relacionadas con el cargo. No asumas experiencia laboral formal." : "Las preguntas deben requerir ejemplos de experiencia laboral real en funciones similares al cargo."}
 Formatea así: ["Pregunta 1", "Pregunta 2", ...]`,
             },
           ],

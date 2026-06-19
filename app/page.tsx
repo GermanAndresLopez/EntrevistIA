@@ -8,7 +8,7 @@ const features = [
   {
     icon: <Mic className="h-6 w-6" />,
     title: "Entrevistas con voz real",
-    description: "Conversá con un entrevistador de IA que te hace preguntas conductuales adaptadas a tu cargo y nivel de experiencia.",
+    description: "Conversa con un entrevistador de IA que te hace preguntas conductuales adaptadas a tu cargo y nivel de experiencia.",
     color: "bg-orange-50 border-orange-100",
     iconBg: "bg-orange-100",
     iconColor: "text-orange-600",
@@ -16,7 +16,7 @@ const features = [
   {
     icon: <BarChart2 className="h-6 w-6" />,
     title: "Retroalimentación detallada",
-    description: "Recibí un análisis de tu comunicación, confianza, profesionalismo y claridad — con puntaje por categoría.",
+    description: "Recibe un análisis de tu comunicación, confianza, profesionalismo y claridad — con puntaje por categoría.",
     color: "bg-amber-50 border-amber-100",
     iconBg: "bg-amber-100",
     iconColor: "text-amber-600",
@@ -24,7 +24,7 @@ const features = [
   {
     icon: <MessageSquare className="h-6 w-6" />,
     title: "Transcripción completa",
-    description: "Revisá exactamente qué escuchó la IA — identificá muletillas, pausas y áreas de mejora en tu forma de hablar.",
+    description: "Revisa exactamente qué escuchó la IA — identifica muletillas, pausas y áreas de mejora en tu forma de hablar.",
     color: "bg-rose-50 border-rose-100",
     iconBg: "bg-rose-100",
     iconColor: "text-rose-600",
@@ -32,9 +32,9 @@ const features = [
 ];
 
 const steps = [
-  { step: "01", title: "Creá tu cuenta", description: "Registrate en segundos con tu correo electrónico. Sin tarjeta de crédito." },
-  { step: "02", title: "Elegí tu cargo", description: "Ingresá el puesto al que aplicás y tu nivel de experiencia." },
-  { step: "03", title: "Practicá y mejorá", description: "Realizá la entrevista, revisá tu retroalimentación y volvé a practicar." },
+  { step: "01", title: "Crea tu cuenta", description: "Regístrate en segundos con tu correo electrónico. Sin tarjeta de crédito." },
+  { step: "02", title: "Elige tu cargo", description: "Ingresa el puesto al que aplicas y tu nivel de experiencia." },
+  { step: "03", title: "Practica y mejora", description: "Realiza la entrevista, revisa tu retroalimentación y vuelve a practicar." },
 ];
 
 const benefits = [
@@ -54,14 +54,14 @@ export default async function LandingPage() {
       <WarmBackground />
 
       {/* Navbar */}
-      <header className="sticky top-0 z-50 bg-[#fffbf5]/90 backdrop-blur-md border-b border-[#e7e5e4]">
+      <header className="sticky top-0 z-50 bg-[#fffbf5]/90 backdrop-blur-md border-b border-[#d6d3d1]">
         <div className="max-w-7xl mx-auto flex items-center justify-between px-6 md:px-12 py-4">
           <Link href="/" className="flex items-center gap-2.5">
             <Image src="/logo.svg" alt="EntrevistIA" width={36} height={36} />
             <span className="text-lg font-bold text-orange-600">EntrevistIA</span>
           </Link>
 
-          <nav className="hidden md:flex items-center gap-8 text-sm text-[#57534e]">
+          <nav className="hidden md:flex items-center gap-8 text-sm font-medium text-[#44403c]">
             <a href="#features" className="hover:text-[#1c1917] transition-colors">Funciones</a>
             <a href="#how-it-works" className="hover:text-[#1c1917] transition-colors">Cómo funciona</a>
           </nav>
@@ -73,7 +73,7 @@ export default async function LandingPage() {
               </Link>
             ) : (
               <>
-                <Link href="/sign-in" className="px-4 py-2 text-sm text-[#57534e] hover:text-[#1c1917] transition-colors">
+                <Link href="/sign-in" className="px-4 py-2 text-sm font-medium text-[#44403c] hover:text-[#1c1917] transition-colors">
                   Iniciar sesión
                 </Link>
                 <Link href="/sign-up" className="px-4 py-2 rounded-full bg-orange-600 hover:bg-orange-500 text-white text-sm font-semibold transition-all shadow-sm">
@@ -88,16 +88,16 @@ export default async function LandingPage() {
       {/* Hero */}
       <section className="relative pt-20 pb-32 px-6 md:px-12 overflow-hidden">
         <div className="max-w-4xl mx-auto text-center">
-          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 border border-orange-200 text-orange-700 text-sm font-medium mb-8">
+          <span className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-orange-100 border border-orange-200 text-orange-700 text-sm font-semibold mb-8">
             ✨ Entrevistas conductuales con IA
           </span>
 
           <h1 className="text-4xl md:text-6xl font-bold text-[#1c1917] leading-tight mb-6">
-            Practicá entrevistas de trabajo
+            Practica entrevistas de trabajo
             <span className="block text-orange-600 mt-2">como si fuera el día real</span>
           </h1>
 
-          <p className="text-lg md:text-xl text-[#57534e] max-w-2xl mx-auto mb-10 leading-relaxed">
+          <p className="text-lg md:text-xl text-[#44403c] max-w-2xl mx-auto mb-10 leading-relaxed font-medium">
             Un entrevistador de IA te hace preguntas conductuales adaptadas a tu cargo, escucha tus respuestas y te da retroalimentación detallada sobre tu comunicación, confianza y profesionalismo.
           </p>
 
@@ -111,26 +111,26 @@ export default async function LandingPage() {
                 <Link href="/sign-up" className="flex items-center gap-2 px-8 py-4 rounded-full bg-orange-600 hover:bg-orange-500 text-white font-bold text-base transition-all shadow-lg shadow-orange-200">
                   Comenzar gratis <ArrowRight className="h-5 w-5" />
                 </Link>
-                <Link href="/sign-in" className="px-8 py-4 rounded-full bg-white border border-[#e7e5e4] text-[#1c1917] hover:bg-orange-50 font-semibold text-base transition-all shadow-sm">
+                <Link href="/sign-in" className="px-8 py-4 rounded-full bg-white border border-[#d6d3d1] text-[#1c1917] hover:bg-orange-50 font-semibold text-base transition-all shadow-sm">
                   Iniciar sesión
                 </Link>
               </>
             )}
           </div>
 
-          <p className="text-[#78716c] text-sm mt-4">Sin tarjeta de crédito · 100% gratuito</p>
+          <p className="text-[#57534e] text-sm font-medium mt-4">Sin tarjeta de crédito · 100% gratuito</p>
         </div>
       </section>
 
       {/* Features */}
-      <section id="features" className="py-24 px-6 md:px-12 bg-white border-y border-[#e7e5e4]">
+      <section id="features" className="py-24 px-6 md:px-12 bg-white border-y border-[#d6d3d1]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1c1917] mb-4">
-              Todo lo que necesitás para mejorar en entrevistas
+              Todo lo que necesitas para mejorar en entrevistas
             </h2>
-            <p className="text-[#57534e] text-lg max-w-2xl mx-auto">
-              No más practicar solo frente al espejo. EntrevistIA te da retroalimentación real sobre cómo hablás.
+            <p className="text-[#44403c] text-lg font-medium max-w-2xl mx-auto">
+              No más practicar solo frente al espejo. EntrevistIA te da retroalimentación real sobre cómo hablas.
             </p>
           </div>
 
@@ -158,7 +158,7 @@ export default async function LandingPage() {
               <h2 className="text-3xl md:text-4xl font-bold text-[#1c1917] mb-6">
                 ¿Por qué EntrevistIA?
               </h2>
-              <p className="text-[#57534e] text-lg mb-8 leading-relaxed">
+              <p className="text-[#44403c] text-lg font-medium mb-8 leading-relaxed">
                 Las entrevistas conductuales son las más comunes y las menos practicadas. EntrevistIA te ayuda a estructurar mejor tus respuestas y hablar con más seguridad.
               </p>
               <ul className="flex flex-col gap-3">
@@ -175,19 +175,19 @@ export default async function LandingPage() {
               <div className="flex flex-col gap-4">
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-full bg-orange-200 flex items-center justify-center text-lg shrink-0">🤖</div>
-                  <div className="bg-white rounded-2xl rounded-tl-none px-4 py-3 shadow-sm border border-orange-100 text-sm text-[#292524]">
-                    Buenos días. Gracias por tu tiempo. Vamos a comenzar. Contame sobre una situación en la que tuviste que trabajar bajo mucha presión. ¿Cómo lo manejaste?
+                  <div className="bg-white rounded-2xl rounded-tl-none px-4 py-3 shadow-sm border border-orange-100 text-sm text-[#1c1917] font-medium">
+                    Buenos días. Gracias por tu tiempo. Vamos a comenzar. Cuéntame sobre una situación en la que tuviste que trabajar bajo mucha presión. ¿Cómo lo manejaste?
                   </div>
                 </div>
                 <div className="flex items-start gap-3 justify-end">
-                  <div className="bg-orange-600 rounded-2xl rounded-tr-none px-4 py-3 shadow-sm text-sm text-white max-w-[80%]">
+                  <div className="bg-orange-600 rounded-2xl rounded-tr-none px-4 py-3 shadow-sm text-sm text-white font-medium max-w-[80%]">
                     En mi trabajo anterior tuve que entregar un proyecto en 48 horas...
                   </div>
                   <div className="w-10 h-10 rounded-full bg-orange-100 flex items-center justify-center text-lg shrink-0">👤</div>
                 </div>
                 <div className="flex items-start gap-3">
                   <div className="w-10 h-10 rounded-full bg-orange-200 flex items-center justify-center text-lg shrink-0">🤖</div>
-                  <div className="bg-white rounded-2xl rounded-tl-none px-4 py-3 shadow-sm border border-orange-100 text-sm text-[#292524]">
+                  <div className="bg-white rounded-2xl rounded-tl-none px-4 py-3 shadow-sm border border-orange-100 text-sm text-[#1c1917] font-medium">
                     Claro, esa situación de presión.
                   </div>
                 </div>
@@ -198,11 +198,11 @@ export default async function LandingPage() {
       </section>
 
       {/* How it works */}
-      <section id="how-it-works" className="py-24 px-6 md:px-12 bg-white border-y border-[#e7e5e4]">
+      <section id="how-it-works" className="py-24 px-6 md:px-12 bg-white border-y border-[#d6d3d1]">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-4xl font-bold text-[#1c1917] mb-4">Cómo funciona</h2>
-            <p className="text-[#57534e] text-lg">Tres pasos simples para mejorar tus entrevistas.</p>
+            <p className="text-[#44403c] text-lg font-medium">Tres pasos simples para mejorar tus entrevistas.</p>
           </div>
 
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
@@ -229,8 +229,8 @@ export default async function LandingPage() {
             <h2 className="text-3xl md:text-4xl font-bold text-white mb-4">
               ¿Listo para practicar?
             </h2>
-            <p className="text-white/80 text-lg mb-8">
-              Creá tu cuenta gratis y realizá tu primera entrevista en menos de 5 minutos.
+            <p className="text-white/90 text-lg font-medium mb-8">
+              Crea tu cuenta gratis y realiza tu primera entrevista en menos de 5 minutos.
             </p>
             <Link
               href={userAuthenticated ? "/dashboard" : "/sign-up"}
@@ -243,13 +243,13 @@ export default async function LandingPage() {
       </section>
 
       {/* Footer */}
-      <footer className="border-t border-[#e7e5e4] py-8 px-6 md:px-12 bg-white">
+      <footer className="border-t border-[#d6d3d1] py-8 px-6 md:px-12 bg-white">
         <div className="max-w-7xl mx-auto flex flex-col md:flex-row items-center justify-between gap-4">
           <div className="flex items-center gap-2">
             <Image src="/logo.svg" alt="EntrevistIA" width={28} height={28} />
-            <span className="text-sm font-semibold text-[#57534e]">EntrevistIA</span>
+            <span className="text-sm font-semibold text-[#44403c]">EntrevistIA</span>
           </div>
-          <p className="text-[#78716c] text-sm">
+          <p className="text-[#57534e] text-sm font-medium">
             © {new Date().getFullYear()} EntrevistIA. Todos los derechos reservados.
           </p>
         </div>

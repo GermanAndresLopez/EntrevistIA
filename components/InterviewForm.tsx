@@ -30,7 +30,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
 
   const handleSubmit = async () => {
     if (isCargo && !role.trim()) {
-      setError("Por favor indicá el cargo o rol.");
+      setError("Por favor indica el cargo o rol.");
       return;
     }
     setError("");
@@ -56,7 +56,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
       if (!res.ok || !data.success) throw new Error("Error al generar la entrevista.");
       router.push(`/interview/${data.interviewId}`);
     } catch {
-      setError("Ocurrió un error. Intentá de nuevo.");
+      setError("Ocurrió un error. Inténtalo de nuevo.");
     } finally {
       setLoading(false);
     }
@@ -69,7 +69,7 @@ const InterviewForm = ({ userId }: { userId: string }) => {
           <div className="flex flex-col gap-1">
             <h3>Nueva entrevista</h3>
             <p className="text-sm text-light-400">
-              Elegí el tipo de entrevista y configurá los parámetros
+              Elige el tipo de entrevista y configura los parámetros
             </p>
           </div>
 

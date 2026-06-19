@@ -12,7 +12,7 @@ const InterviewPage = ({ userId }: InterviewPageProps) => {
     <div className="flex flex-col items-center gap-8 w-full max-w-2xl mx-auto">
       <div className="flex flex-col items-center gap-2 text-center">
         <h3>Genera tu entrevista</h3>
-        <p className="text-light-400 text-sm">
+        <p className="text-light-400 text-sm font-medium">
           Completa el formulario para crear una entrevista personalizada
         </p>
       </div>

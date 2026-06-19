@@ -13,7 +13,7 @@ export async function getInterviewerAck(userAnswer: string): Promise<string> {
         messages: [
           {
             role: "system",
-            content: `Eres un entrevistador. Debes dar una respuesta MUY breve y natural, de máximo 6 palabras, que haga referencia directa a algo puntual que dijo el candidato (una palabra clave, una situación, un concepto). NO analices, NO evalúes, NO repitas la respuesta. Solo reaccioná de forma natural como lo haría un entrevistador humano. Ejemplos válidos:
+            content: `Eres un entrevistador. Debes dar una respuesta MUY breve y natural, de máximo 6 palabras, que haga referencia directa a algo puntual que dijo el candidato (una palabra clave, una situación, un concepto). NO analices, NO evalúes, NO repitas la respuesta. Solo reacciona de forma natural como lo haría un entrevistador humano. Ejemplos válidos:
 - "Entendido, lo del equipo distribuido."
 - "Claro, especialmente en ese contexto."
 - "Interesante, esa situación con el cliente."

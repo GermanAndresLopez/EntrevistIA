@@ -15,10 +15,10 @@
   --color-primary-200: #ea580c;   /* orange-600 — CTA, accent */
 
   /* Texto sobre fondos claros */
-  --color-light-100: #292524;     /* stone-800 — texto principal */
-  --color-light-400: #57534e;     /* stone-600 — texto secundario (ratio 6.3:1) */
-  --color-light-600: #78716c;     /* stone-500 — placeholder / muted */
-  --color-light-800: #e7e5e4;     /* stone-200 — bordes suaves */
+  --color-light-100: #1c1917;     /* stone-900 — texto principal (17.8:1) */
+  --color-light-400: #44403c;     /* stone-700 — texto secundario (10.2:1) */
+  --color-light-600: #57534e;     /* stone-600 — placeholder / muted (6.9:1) */
+  --color-light-800: #d6d3d1;     /* stone-300 — bordes visibles */
 
   /* Superficies */
   --color-dark-100: #1c1917;      /* stone-900 — texto sobre botones naranja */
