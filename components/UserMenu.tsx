@@ -5,7 +5,7 @@ import { useRouter } from "next/navigation";
 import Link from "next/link";
 import { createClient } from "@/lib/supabase/client";
 
-const UserMenu = ({ userName, userEmail }: { userName: string; userEmail: string }) => {
+const UserMenu = ({ userName, userEmail, userImage }: { userName: string; userEmail: string; userImage?: string }) => {
   const [open, setOpen] = useState(false);
   const router = useRouter();
   const ref = useRef<HTMLDivElement>(null);
@@ -29,9 +29,15 @@ const UserMenu = ({ userName, userEmail }: { userName: string; userEmail: string
     <div ref={ref} className="relative">
       <button
         onClick={() => setOpen((v) => !v)}
-        className="w-10 h-10 rounded-full bg-primary-200 text-dark-100 font-bold text-base flex items-center justify-center hover:opacity-80 transition-opacity cursor-pointer"
+        className="w-10 h-10 rounded-full overflow-hidden flex items-center justify-center hover:opacity-80 transition-opacity cursor-pointer"
       >
-        {initial}
+        {userImage ? (
+          <img src={userImage} alt={userName} className="w-full h-full object-cover" />
+        ) : (
+          <span className="w-full h-full bg-primary-200 text-white font-bold text-base flex items-center justify-center">
+            {initial}
+          </span>
+        )}
       </button>
 
       {open && (

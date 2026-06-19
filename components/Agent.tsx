@@ -108,7 +108,7 @@ const ProgressBar = ({
   );
 };
 
-const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentProps) => {
+const Agent = ({ userName, userId, userImage, type, interviewId, questions = [] }: AgentProps) => {
   const router = useRouter();
   const [isSpeaking, setIsSpeaking] = useState(false);
   const [isListening, setIsListening] = useState(false);
@@ -371,13 +371,17 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
         <div className="flex flex-col items-end gap-3 flex-1">
           <div className="card-border">
             <div className="card-content">
-              <Image
-                src="/user-avatar.png"
-                alt="usuario"
-                width={540}
-                height={540}
-                className="rounded-full object-cover size-[120px]"
-              />
+              {userImage ? (
+                <img
+                  src={userImage}
+                  alt={userName}
+                  className="rounded-full object-cover size-[120px]"
+                />
+              ) : (
+                <div className="size-[120px] rounded-full bg-primary-200 flex items-center justify-center text-white text-5xl font-bold select-none">
+                  {userName.charAt(0).toUpperCase()}
+                </div>
+              )}
               <h3>{userName}</h3>
             </div>
           </div>
@@ -385,13 +389,13 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
           {isActive && (
             <>
               {isListening && (
-                <div className="max-w-[280px] px-4 py-3 rounded-2xl rounded-tr-none bg-orange-100 border border-orange-200 text-light-100 text-sm leading-relaxed self-end animate-fadeIn line-clamp-2">
-                  {liveText ? tailText(liveText) : (
-                    <span className="flex items-center gap-2 text-light-400 italic">
+                <div className="max-w-[280px] px-4 py-3 rounded-2xl rounded-tr-none bg-primary-200 text-white text-sm leading-relaxed self-end shadow-sm overflow-hidden" style={{ maxHeight: "4.5em" }}>
+                  {liveText ? tailText(liveText, 80) : (
+                    <span className="flex items-center gap-2 opacity-80 italic">
                       <span className="flex gap-0.5">
-                        <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
-                        <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
-                        <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                        <span className="w-1.5 h-1.5 bg-white/70 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                        <span className="w-1.5 h-1.5 bg-white/70 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                        <span className="w-1.5 h-1.5 bg-white/70 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
                       </span>
                       Escuchando...
                     </span>

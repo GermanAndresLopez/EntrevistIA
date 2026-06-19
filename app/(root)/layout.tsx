@@ -17,7 +17,7 @@ const Layout = async ({ children }: { children: ReactNode }) => {
           <Image src="/logo.svg" alt="Logo de EntrevistIA" width={38} height={38} />
           <h2 className="text-primary-200 text-xl font-bold">EntrevistIA</h2>
         </Link>
-        <UserMenu userName={user.name} userEmail={user.email} />
+        <UserMenu userName={user.name} userEmail={user.email} userImage={user.profileImage} />
       </nav>
 
       {children}
