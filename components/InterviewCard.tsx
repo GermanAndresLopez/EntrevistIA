@@ -14,6 +14,7 @@ const InterviewCard = async ({
   id,
   userId,
   role,
+  type,
   createdAt,
   isTemplate = false,
   currentUserId,
@@ -37,7 +38,7 @@ const InterviewCard = async ({
       <div className="card-interview">
         <div>
           <div className="absolute top-0 right-0 w-fit px-4 py-2 rounded-bl-lg bg-orange-100 border-b border-l border-orange-200">
-            <p className="badge-text">Conductual</p>
+            <p className="badge-text">{type || "Conductual"}</p>
           </div>
 
           {/* Role-based icon */}

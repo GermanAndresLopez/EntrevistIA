@@ -1,8 +1,6 @@
 import { getInterviewById } from "@/lib/actions/general.action";
 import { redirect } from "next/navigation";
-import Image from "next/image";
-import { getRandomInterviewCover } from "@/lib/utils";
-import DisplayTechIcons from "@/components/DisplayTechIcons";
+import { getRoleDisplay } from "@/lib/utils";
 import Agent from "@/components/Agent";
 import { getCurrentUser } from "@/lib/actions/auth.action";
 
@@ -13,37 +11,21 @@ const Page = async ({ params }: RouteParams) => {
 
   if (!interview) redirect("/dashboard");
 
-  const typeTranslations: Record<string, string> = {
-    Technical: "Técnica",
-    Behavioral: "Conductual",
-    Mixed: "Mixta",
-    tecnica: "Técnica",
-    conductual: "Conductual",
-    combinada: "Combinada",
-  };
-  const displayType = typeTranslations[interview.type] || interview.type;
+  const { emoji, gradient } = getRoleDisplay(interview.role);
 
   return (
     <>
-      <div className="flex flex-row gap-4 justify-between">
-        <div className="flex flex-row gap-4 items-center max-sm:flex-col">
-          <div className="flex flex-row gap-4 items-center">
-            <Image
-              src={getRandomInterviewCover()}
-              alt="cover-image"
-              width={40}
-              height={40}
-              className="rounded-full object-cover size-[40px]"
-            />
-            <h3 className="capitalize">Entrevista de {interview.role}</h3>
+      <div className="flex flex-row gap-4 justify-between items-center">
+        <div className="flex flex-row gap-4 items-center">
+          <div className={`w-10 h-10 rounded-full bg-gradient-to-br ${gradient} flex items-center justify-center text-xl`}>
+            {emoji}
           </div>
-
-          <DisplayTechIcons techStack={interview.techstack} />
+          <h3 className="capitalize">Entrevista — {interview.role}</h3>
         </div>
 
-        <p className="bg-dark-200 px-4 py-2 rounded-lg h-fit capitalize">
-          {displayType}
-        </p>
+        <span className="bg-orange-100 border border-orange-200 px-4 py-1.5 rounded-full text-xs font-bold text-orange-700 tracking-wide">
+          {interview.type}
+        </span>
       </div>
 
       <Agent
