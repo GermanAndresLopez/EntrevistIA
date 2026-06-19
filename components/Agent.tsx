@@ -15,6 +15,8 @@ enum CallStatus {
   FINISHED = "FINISHED",
 }
 
+type Phase = "idle" | "intro" | "asking" | "listening" | "processing" | "feedback" | "done";
+
 interface SavedMessage {
   role: "user" | "assistant";
   content: string;
@@ -27,27 +29,84 @@ declare global {
   }
 }
 
-// Muestra sólo las últimas oraciones que quepan en maxChars
-const tailText = (text: string, maxChars = 200): string => {
+const tailText = (text: string, maxChars = 90): string => {
   if (text.length <= maxChars) return text;
   const chunk = text.slice(-maxChars);
   const firstSpace = chunk.indexOf(" ");
-  return firstSpace > 0 ? chunk.slice(firstSpace + 1) : chunk;
+  return "…" + (firstSpace > 0 ? chunk.slice(firstSpace + 1) : chunk);
 };
 
 const Bubble = ({ text, side }: { text: string; side: "left" | "right" }) => (
   <div
     key={text}
     className={cn(
-      "max-w-[260px] px-4 py-3 rounded-2xl text-sm leading-relaxed animate-fadeIn",
+      "max-w-[280px] px-4 py-3 rounded-2xl text-sm leading-relaxed animate-fadeIn line-clamp-3",
       side === "left"
-        ? "bg-dark-200 text-light-100 rounded-tl-none self-start"
-        : "bg-primary-200 text-dark-100 rounded-tr-none self-end",
+        ? "bg-white border border-light-800 text-light-100 rounded-tl-none self-start shadow-sm"
+        : "bg-primary-200 text-white rounded-tr-none self-end shadow-sm",
     )}
   >
     {tailText(text)}
   </div>
 );
+
+const ProgressBar = ({
+  current,
+  total,
+  phase,
+}: {
+  current: number;
+  total: number;
+  phase: Phase;
+}) => {
+  const pct = total > 0 ? Math.round((current / total) * 100) : 0;
+
+  const label = (() => {
+    switch (phase) {
+      case "idle": return "Listo para comenzar";
+      case "intro": return "Introducción";
+      case "asking": return `Pregunta ${current + 1} de ${total}`;
+      case "listening": return `Escuchando respuesta — Pregunta ${current + 1} de ${total}`;
+      case "processing": return `Procesando — Pregunta ${current + 1} de ${total}`;
+      case "feedback": return "Generando retroalimentación...";
+      case "done": return "Entrevista completada";
+    }
+  })();
+
+  return (
+    <div className="w-full flex flex-col gap-2">
+      <div className="flex items-center justify-between text-sm font-semibold">
+        <span className="text-light-100">{label}</span>
+        {phase !== "idle" && phase !== "intro" && phase !== "feedback" && (
+          <span className="text-primary-200 tabular-nums">{pct}%</span>
+        )}
+      </div>
+      <div className="w-full h-2 bg-light-800 rounded-full overflow-hidden">
+        <div
+          className="h-full bg-gradient-to-r from-orange-400 to-orange-600 rounded-full transition-all duration-700 ease-out"
+          style={{ width: `${phase === "feedback" || phase === "done" ? 100 : pct}%` }}
+        />
+      </div>
+      {phase !== "idle" && (
+        <div className="flex gap-1.5 justify-center">
+          {Array.from({ length: total }).map((_, i) => (
+            <div
+              key={i}
+              className={cn(
+                "w-2 h-2 rounded-full transition-all duration-300",
+                i < current
+                  ? "bg-orange-500"
+                  : i === current && phase !== "done" && phase !== "feedback"
+                    ? "bg-orange-400 animate-pulse"
+                    : "bg-light-800",
+              )}
+            />
+          ))}
+        </div>
+      )}
+    </div>
+  );
+};
 
 const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentProps) => {
   const router = useRouter();
@@ -57,6 +116,8 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
   const [interviewerBubble, setInterviewerBubble] = useState("");
   const [userBubble, setUserBubble] = useState("");
   const [liveText, setLiveText] = useState("");
+  const [currentQ, setCurrentQ] = useState(0);
+  const [phase, setPhase] = useState<Phase>("idle");
 
   const transcriptRef = useRef<SavedMessage[]>([]);
   const recognitionRef = useRef<any>(null);
@@ -67,7 +128,9 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
     const loadVoice = () => {
       const voices = window.speechSynthesis.getVoices();
       voiceRef.current =
-        voices.find((v) => v.name.toLowerCase().includes("google") && v.lang.startsWith("es")) ||
+        voices.find((v) => /microsoft.*sabina/i.test(v.name)) ||
+        voices.find((v) => /microsoft/i.test(v.name) && v.lang.startsWith("es")) ||
+        voices.find((v) => /google.*español/i.test(v.name)) ||
         voices.find((v) => v.name.toLowerCase().includes("mónica")) ||
         voices.find((v) => v.name.toLowerCase().includes("paulina")) ||
         voices.find((v) => v.lang === "es-ES") ||
@@ -85,8 +148,8 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
       window.speechSynthesis.cancel();
       const utterance = new SpeechSynthesisUtterance(text);
       utterance.lang = "es-ES";
-      utterance.rate = 0.88;
-      utterance.pitch = 1.05;
+      utterance.rate = 1.0;
+      utterance.pitch = 1.0;
       if (voiceRef.current) utterance.voice = voiceRef.current;
       setIsSpeaking(true);
       utterance.onend = () => { setIsSpeaking(false); resolve(); };
@@ -124,7 +187,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
 
       const resetSilenceTimer = () => {
         if (silenceTimer) clearTimeout(silenceTimer);
-        silenceTimer = setTimeout(finish, 4500); // 4.5s sin hablar = terminó
+        silenceTimer = setTimeout(finish, 4500);
       };
 
       const startRecognition = () => {
@@ -133,7 +196,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
         const r = new SpeechRecognition();
         recognitionRef.current = r;
         r.lang = "es-ES";
-        r.continuous = true;   // sin gaps entre frases
+        r.continuous = true;
         r.interimResults = true;
         r.maxAlternatives = 1;
 
@@ -147,7 +210,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
             }
           }
           setLiveText(finalTranscript + interim);
-          resetSilenceTimer(); // reinicia cada vez que habla
+          resetSilenceTimer();
         };
 
         r.onerror = (e: any) => {
@@ -162,7 +225,6 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
         };
 
         r.onend = () => {
-          // Chrome paró solo (límite ~60s o silencio largo) → reiniciar
           if (!resolved && !shouldStop.current) {
             if (restartTimer) clearTimeout(restartTimer);
             restartTimer = setTimeout(startRecognition, 250);
@@ -176,7 +238,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
       setTimeout(() => {
         startRecognition();
         if (silenceTimer) clearTimeout(silenceTimer);
-        silenceTimer = setTimeout(finish, 12000); // 12s para empezar a hablar
+        silenceTimer = setTimeout(finish, 12000);
       }, 400);
     });
   }, []);
@@ -196,6 +258,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
     setCallStatus(CallStatus.ACTIVE);
     shouldStop.current = false;
 
+    setPhase("intro");
     const intro = "¡Hola! Gracias por tu tiempo. Comenzamos la entrevista.";
     setInterviewerBubble(intro);
     await speak(intro);
@@ -203,18 +266,22 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
     for (let i = 0; i < questions.length; i++) {
       if (shouldStop.current) break;
 
+      setCurrentQ(i);
+      setPhase("asking");
       const question = questions[i];
       addMessage({ role: "assistant", content: question });
       await speak(question);
 
       if (shouldStop.current) break;
 
+      setPhase("listening");
       const answer = await listenForAnswer();
 
       if (answer) {
         addMessage({ role: "user", content: answer });
 
         if (i < questions.length - 1 && !shouldStop.current) {
+          setPhase("processing");
           const ack = await getInterviewerAck(answer);
           if (ack && !shouldStop.current) {
             addMessage({ role: "assistant", content: ack });
@@ -225,6 +292,8 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
     }
 
     if (!shouldStop.current) {
+      setCurrentQ(questions.length);
+      setPhase("done");
       const outro = "Muchas gracias. Ha sido un placer. Pronto recibirás tu retroalimentación.";
       setInterviewerBubble(outro);
       setUserBubble("");
@@ -236,6 +305,7 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
 
   useEffect(() => {
     if (callStatus === CallStatus.FINISHED && type === "interview") {
+      setPhase("feedback");
       handleGenerateFeedback();
     }
   }, [callStatus]);
@@ -272,6 +342,9 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
 
   return (
     <>
+      {/* Progress */}
+      <ProgressBar current={currentQ} total={questions.length} phase={phase} />
+
       <div className="call-view">
         {/* Entrevistador */}
         <div className="flex flex-col items-start gap-3 flex-1">
@@ -312,8 +385,17 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
           {isActive && (
             <>
               {isListening && (
-                <div className="max-w-[260px] px-4 py-3 rounded-2xl rounded-tr-none bg-primary-200/40 text-light-100 text-sm leading-relaxed italic self-end animate-pulse">
-                  {liveText ? tailText(liveText) : "Escuchando..."}
+                <div className="max-w-[280px] px-4 py-3 rounded-2xl rounded-tr-none bg-orange-100 border border-orange-200 text-light-100 text-sm leading-relaxed self-end animate-fadeIn line-clamp-2">
+                  {liveText ? tailText(liveText) : (
+                    <span className="flex items-center gap-2 text-light-400 italic">
+                      <span className="flex gap-0.5">
+                        <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: "0ms" }} />
+                        <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: "150ms" }} />
+                        <span className="w-1.5 h-1.5 bg-orange-400 rounded-full animate-bounce" style={{ animationDelay: "300ms" }} />
+                      </span>
+                      Escuchando...
+                    </span>
+                  )}
                 </div>
               )}
               {!isListening && userBubble && (
@@ -326,19 +408,26 @@ const Agent = ({ userName, userId, type, interviewId, questions = [] }: AgentPro
 
       <div className="w-full flex justify-center mt-6">
         {callStatus !== CallStatus.ACTIVE ? (
-          <button
-            className="relative btn-call mt-5"
-            onClick={handleStart}
-            disabled={callStatus === CallStatus.CONNECTING}
-          >
-            <span
-              className={cn(
-                "absolute animate-ping rounded-full opacity-75",
-                callStatus !== CallStatus.CONNECTING && "hidden",
-              )}
-            />
-            <span>{isInactive ? "Iniciar entrevista" : ". . ."}</span>
-          </button>
+          phase === "feedback" ? (
+            <div className="flex flex-col items-center gap-3 mt-5">
+              <div className="w-8 h-8 border-[3px] border-orange-200 border-t-orange-600 rounded-full animate-spin" />
+              <p className="text-sm font-semibold text-light-400">Analizando tu entrevista...</p>
+            </div>
+          ) : (
+            <button
+              className="relative btn-call mt-5"
+              onClick={handleStart}
+              disabled={callStatus === CallStatus.CONNECTING}
+            >
+              <span
+                className={cn(
+                  "absolute animate-ping rounded-full opacity-75",
+                  callStatus !== CallStatus.CONNECTING && "hidden",
+                )}
+              />
+              <span>{isInactive ? "Iniciar entrevista" : ". . ."}</span>
+            </button>
+          )
         ) : (
           <button className="btn-disconnect" onClick={handleStop}>
             Finalizar
